@@ -2,18 +2,18 @@ steps:
 
 #Building docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA', '.']
+  args: ['build', '-t', gcr.io/$PROJECT_ID/insighta-app:$SHORT_SHA, '.']
 
 #Pushing docker-image to gcr
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA']
+  args: ['push', 'gcr.io/$PROJECT_ID/insighta-app:$SHORT_SHA']
 
 #Deploy to cr
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
   args: [
     'run', 'deploy', 'insighta-app',
-    '--image', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA',
+    '--image', 'gcr.io/$PROJECT_ID/insighta-app:$SHORT_SHA',
     '--region', 'us-central1',
     '--platform', 'managed',
     '--allow-unauthenticated'
@@ -21,7 +21,7 @@ steps:
 
 #telling cloud build what to do after build
 images:
-- 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA'
+- 'gcr.io/$PROJECT_ID/insighta-app:$SHORT_SHA'
 
 options:
   logging: CLOUD_LOGGING_ONLY
