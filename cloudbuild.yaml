@@ -1,15 +1,15 @@
 steps: 
 
 #Building docker image
-- name: 'CloudBuild-docker-image'
+- name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA', '.']
 
 #Pushing docker-image to gcr
-- name: 'pushing-image-to-gcr'
+- name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA']
 
 #Deploy to cr
-- name: 'deplpoy-to-cloud-run'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
   args: [
     'run', 'deploy', 'insighta-app',
