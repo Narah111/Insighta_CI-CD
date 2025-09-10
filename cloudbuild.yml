@@ -1,0 +1,24 @@
+steps: 
+
+#Building docker image
+- name: 'CloudBuild-docker-image'
+  args: ['build', '-t', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA', '.']
+
+#Pushing docker-image to gcr
+- name: 'pushing-image-to-gcr'
+  args: ['push', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA']
+
+#Deploy to cr
+- name: 'deplpoy-to-cloud-run'
+  entrypoint: 'gcloud'
+  args: [
+    'run', 'deploy', 'insighta-app',
+    '--image', 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA',
+    '--region', 'us-central1',
+    '--platform', 'managed',
+    '--allow-unauthenticated'
+  ]
+
+#tell cloud build what to do after build
+images:
+- 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA'
