@@ -19,6 +19,6 @@ steps:
     '--allow-unauthenticated'
   ]
 
-#tell cloud build what to do after build
+#telling cloud build what to do after build
 images:
 - 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA'
