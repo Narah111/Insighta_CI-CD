@@ -22,3 +22,6 @@ steps:
 #telling cloud build what to do after build
 images:
 - 'gcr.io/$insightaproject/insighta-app:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
