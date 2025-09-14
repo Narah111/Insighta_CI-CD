@@ -8,7 +8,7 @@ steps:
     - '-c'
     - |
       pip install -r requirements-dev.txt
-      python3 -m pytest tests --maxfail=1 --disable-warinings -q
+      python3 -m pytest tests --maxfail=1 --disable-warnings -q
 
 #Building docker image
 - name: 'gcr.io/cloud-builders/docker'
