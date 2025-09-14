@@ -1,5 +1,15 @@
 steps: 
 
+#Runing tests before building docker image
+- name: 'python:3.11-slim'
+  entrypoint: 'bash'
+  args:
+    #run multiple commands and as string
+    - '-c'
+    - |
+      pip install -r requirements-dev.txt
+      python3 -m pytest tests --maxfail=1 --disable-warinings -q
+
 #Building docker image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', gcr.io/$PROJECT_ID/insighta-app:$SHORT_SHA, '.']
