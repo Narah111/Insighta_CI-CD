@@ -2,6 +2,7 @@ from app import app
 
 def test_index():
     #Given
+    app.testing = True                         #<---  Enable testing mode
     client = app.test_client()
 
     #When
