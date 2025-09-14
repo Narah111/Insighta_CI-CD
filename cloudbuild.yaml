@@ -7,6 +7,7 @@ steps:
     #run multiple commands and as string
     - '-c'
     - |
+      pip install -r requirements.txt
       pip install -r requirements-dev.txt
       python3 -m pytest tests --maxfail=1 --disable-warnings -q
 
